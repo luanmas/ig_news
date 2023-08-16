@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: 'ig.news | Home',
 }
 
+export const revalidate = 60 * 60 * 24;
+
 export default async function Home() {
 
-  const price = await stripe.prices.retrieve('price_1NbT0yAGY9OYkasHGDayCxR0' , {
-    expand:['product']
-  })
+  const price = await stripe.prices.retrieve('price_1NbT0yAGY9OYkasHGDayCxR0')
 
   const product = {
     priceId : price.id,

@@ -3,6 +3,8 @@ import "../../styles/globals.scss"
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
+import { SessionProvider as NextAuthProvider } from 'next-auth/react';
+
 const roboto = Roboto({
       weight: ['400' , '700' , '900'],
       style: ['normal' , 'italic'],
@@ -15,15 +17,16 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+  children, } : { children: React.ReactNode} , {
+    Component , pageProps
+  }) {
   return (
     <html lang="pt-br">
       <body className={roboto.className}>
-        <Header />
-        {children}
+        <NextAuthProvider session={session}>
+          <Header />
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   )
